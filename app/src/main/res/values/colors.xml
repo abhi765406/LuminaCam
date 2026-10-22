@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#FFC83D</color>
+    <color name="chip_bg">#55000000</color>
+    <color name="text_main">#FFFFFF</color>
+    <color name="text_dim">#B3FFFFFF</color>
+</resources>
