@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.luminacam.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.luminacam.app"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+}
+
+// Deliberately no third-party dependencies: only the Android framework's own
+// Camera2, MediaRecorder, MediaCodec and graphics APIs. Nothing external to break.
