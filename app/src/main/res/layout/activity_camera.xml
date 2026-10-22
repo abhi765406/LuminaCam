@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:keepScreenOn="true">
+
+    <com.luminacam.app.AutoFitTextureView
+        android:id="@+id/textureView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="56dp"/>
+
+    <com.luminacam.app.OverlayView
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/touchLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/flashOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFFFF"
+        android:visibility="gone"/>
+
+    <!-- top bar -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="#CC000000">
+
+        <TextView
+            android:id="@+id/btnFlash"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="⚡ Off"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:background="@drawable/chip_bg"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/btnTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="⏱ Off"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:background="@drawable/chip_bg"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/btnAspect"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="4:3"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:background="@drawable/chip_bg"/>
+
+        <TextView
+            android:id="@+id/recTimer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="● 00:00"
+            android:textColor="#FF3B30"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/btnSettings"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:text="⚙"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/countdownText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="3"
+        android:textColor="#FFFFFF"
+        android:textSize="110sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        android:shadowRadius="12"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/chip_bg"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Hold still…"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <!-- bottom panel -->
+    <LinearLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/bottom_gradient"
+        android:paddingTop="24dp"
+        android:paddingBottom="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <TextView
+                android:id="@+id/zoomLabel"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="1.0x"
+                android:textColor="#FFC83D"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <SeekBar
+                android:id="@+id/zoomSeek"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"/>
+        </LinearLayout>
+
+        <!-- Pro panel -->
+        <LinearLayout
+            android:id="@+id/proPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/evRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/proEvLabel" android:layout_width="92dp" android:layout_height="wrap_content" android:text="EV 0.0" android:textColor="#FFFFFF" android:textSize="12sp"/>
+                <SeekBar android:id="@+id/proEv" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/isoRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/proIsoLabel" android:layout_width="92dp" android:layout_height="wrap_content" android:text="ISO 100" android:textColor="#FFFFFF" android:textSize="12sp"/>
+                <SeekBar android:id="@+id/proIso" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="100"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shutterRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/proShutterLabel" android:layout_width="92dp" android:layout_height="wrap_content" android:text="1/100" android:textColor="#FFFFFF" android:textSize="12sp"/>
+                <SeekBar android:id="@+id/proShutter" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="100"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/focusRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView android:id="@+id/proFocusLabel" android:layout_width="92dp" android:layout_height="wrap_content" android:text="Focus ∞" android:textColor="#FFFFFF" android:textSize="12sp"/>
+                <SeekBar android:id="@+id/proFocus" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="100"/>
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/proChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/lookScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginTop="6dp">
+            <LinearLayout
+                android:id="@+id/lookStrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/modeScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginTop="4dp">
+            <LinearLayout
+                android:id="@+id/modeStrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/thumb"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/thumb_bg"
+                    android:padding="2dp"/>
+            </FrameLayout>
+
+            <com.luminacam.app.ShutterButton
+                android:id="@+id/shutter"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/btnFlip"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="🔄"
+                    android:textSize="24sp"
+                    android:background="@drawable/chip_bg"/>
+                <TextView
+                    android:id="@+id/btnPause"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="⏸"
+                    android:textSize="24sp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/chip_bg"
+                    android:visibility="gone"/>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
